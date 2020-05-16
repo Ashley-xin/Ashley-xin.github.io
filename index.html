@@ -229,6 +229,208 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/16/KMP%E7%AE%97%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/05/16/KMP%E7%AE%97%E6%B3%95/" itemprop="url">KMP算法</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-05-16T23:51:24+08:00">
+                2020-05-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="KMP算法"><a href="#KMP算法" class="headerlink" title="KMP算法"></a>KMP算法</h3><h4 id="什么是KMP算法"><a href="#什么是KMP算法" class="headerlink" title="什么是KMP算法"></a>什么是KMP算法</h4><p>KMP算法要解决的问题就是在字符串（也叫主串）中的模式（pattern）定位问题。说简单点就是我们平时常说的关键字搜索。模式串就是关键字（接下来称它为P），如果它在一个主串（接下来称为T）中出现，就返回它的具体位置，否则返回-1（常用手段）。</p>
+<p><img src="C:%5CUsers%5Cdell%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1589636898056.png" alt="1589636898056"></p>
+<p>一般而言，对于这种问题，我们第一印象就是使用暴力匹配法：</p>
+<p>1.初始化坐标i , j都为零。</p>
+<p><img src="C:%5CUsers%5Cdell%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1589637115414.png" alt="1589637115414"></p>
+<p>2.比较 i 指针指向的字符是否和 j 指针指向的字符一致。若一致，i , j 都向后进行移动。</p>
+<p><img src="C:%5CUsers%5Cdell%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1589637652713.png" alt="1589637652713"></p>
+<p>3.若不一致，将 i 指针移回这一轮字符比较 i 初始值  + 1（即 i == 1），j 指回 0 下标，反复进行2，3 步骤，直至找到完全匹配的字符下标。否则返回 -1。</p>
+<p><img src="C:%5CUsers%5Cdell%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1589637715745.png" alt="1589637715745"></p>
+<p>代码实现：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">    * 暴力破解法</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@param</span> ts 主串</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@param</span> ps 模式串</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@return</span> 如果找到，返回在主串中第一个字符出现的下标，否则为-1</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">CharacterMatching</span><span class="params">(String ts, String ps)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">       <span class="keyword">char</span>[] t = ts.toCharArray();</span><br><span class="line">       <span class="keyword">char</span>[] p = ps.toCharArray();</span><br><span class="line">       </span><br><span class="line">       <span class="keyword">int</span> i = <span class="number">0</span>; <span class="comment">// 指向主串</span></span><br><span class="line">       <span class="keyword">int</span> j = <span class="number">0</span>; <span class="comment">// 指向模式串</span></span><br><span class="line">       </span><br><span class="line">       <span class="keyword">while</span> (i &lt; t.length &amp;&amp; j &lt; p.length) &#123; </span><br><span class="line">           <span class="keyword">if</span> (t[i] == p[j]) &#123; <span class="comment">// 当两个字符相同</span></span><br><span class="line">               i++;</span><br><span class="line">               j++;</span><br><span class="line">           &#125; <span class="keyword">else</span> &#123;<span class="comment">// 不匹配，i回退，j指向0</span></span><br><span class="line">               i = i - j + <span class="number">1</span>; </span><br><span class="line">               j = <span class="number">0</span>;</span><br><span class="line">           &#125;</span><br><span class="line"></span><br><span class="line">       &#125;</span><br><span class="line">       <span class="comment">//当j == p.length 说明模式串的字符都被遍历到，即匹配。</span></span><br><span class="line">       <span class="keyword">if</span> (j == p.length) &#123;</span><br><span class="line">           <span class="keyword">return</span> i - j;</span><br><span class="line">       &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">           <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<p>根据上述描述，我们发现只要匹配失败，都要将 i，j回退，但是根据题目主串ABABABC，我们发现只需要从i == 2的坐标开始匹配。因为 B（i == 1）显然不等于 A，那么我们每次回退 i 都太过于耗时。</p>
+<p>因此为了使问题得到有效的解决，D.E.Knuth，J.H.Morris和V.R.Pratt提出了KMP算法。</p>
+<p>KMP算法是一种改进的字符串匹配算法，又称为克努特—莫里斯—普拉特操作（简称KMP算法）。KMP算法的核心是利用匹配失败后的信息，尽量减少模式串与主串的匹配次数以达到快速匹配的目的。具体实现就是通过一个next()函数实现，函数本身包含了模式串的局部匹配信息。KMP算法的时间复杂度O(m+n)。</p>
+<p>整个KMP的重点就在于<strong>当某一个字符与主串不匹配时，我们应该知道 j 指针要移动到哪</strong>？</p>
+<p><img src="https://images0.cnblogs.com/blog/416010/201308/17083912-49365b7e67cd4877b2f501074dae68d2.png" alt="img"></p>
+<p>j 指向这个位置是因为我们已经知道了A是匹配的。</p>
+<p><img src="https://images0.cnblogs.com/blog/416010/201308/17083929-a9ccfb08833e4cf1a42c30f05608f8f5.png" alt="img">\</p>
+<p>再来观察一个例子</p>
+<p><img src="https://images0.cnblogs.com/blog/416010/201308/17084030-82e4b71b85a440c5a636d57503931415.png" alt="img"></p>
+<p><img src="https://images0.cnblogs.com/blog/416010/201308/17084037-cc3c34200809414e9421c316ceba2cda.png" alt="img"></p>
+<p>我们发现，当匹配失败时，j 要移动的下一个位置 k。存在着这样的性质：<strong>位置 k 前面的字符数 和 字符不匹配时的 j 的之前 k个字符是一样的</strong>。</p>
+<p>用数学公式表示为：<br>$$<br>P[ <del>0 , k - 1</del>] == P[<del>j - k ,j - 1</del>]<br>$$</p>
+<p>可以通过这个图来理解</p>
+<p><img src="C:%5CUsers%5Cdell%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1589641096246.png" alt="1589641096246"></p>
+<p>j 指的是之前匹配失败的位置，k 指的是你需要 j 移动到的位置。</p>
+<p>那么接下来的问题就是我们如何去求这个K，因为在 P 的每一个位置都可能发生不匹配，也就是说我们要计算每一个位置 j 对应的 k，所以用一个数组next来保存，<strong>next[j] = k，表示当 T[i] != P[j] 时，j 指针的下一个位置。</strong></p>
+<h4 id="求next数组"><a href="#求next数组" class="headerlink" title="求next数组"></a>求next数组</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span>[] getNext(String s) &#123;</span><br><span class="line">       <span class="keyword">char</span>[] p = s.toCharArray();</span><br><span class="line">       <span class="keyword">int</span>[] next = <span class="keyword">new</span> <span class="keyword">int</span>[s.length()];</span><br><span class="line">       next[<span class="number">0</span>] = -<span class="number">1</span>;</span><br><span class="line">       <span class="keyword">int</span> j = <span class="number">0</span>;</span><br><span class="line">       <span class="keyword">int</span> k = -<span class="number">1</span>;</span><br><span class="line">       <span class="keyword">while</span> (j &lt; s.length() - <span class="number">1</span>) &#123;</span><br><span class="line">           <span class="keyword">if</span> (k == -<span class="number">1</span> || p[j] == p[k]) &#123;</span><br><span class="line">               k++;</span><br><span class="line">               j++;</span><br><span class="line">               next[j] = k;</span><br><span class="line">           &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">               k = next[k];</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">return</span> next;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<p>现在要始终记住一点，<strong>next[j]的值（也就是k）表示，当P[j] != T[i]时，j 指针的下一步移动位置</strong>。</p>
+<p>先来看第一个：当 j 为0时，如果这时候不匹配，怎么办？</p>
+<p><img src="https://images0.cnblogs.com/blog/416010/201308/17084258-efd2e95d3644427ebc0304ed3d7adefb.png" alt="img"></p>
+<p>像上图这种情况，<strong>j已经在最左边了，不可能再移动了，这时候要应该是 i 指针后移</strong>。所以在代码中才会有next[0] = -1;这个初始化。</p>
+<p><strong>那如果P[k] != P[j]呢？</strong></p>
+<p><img src="https://images0.cnblogs.com/blog/416010/201308/17122358-fd7e52dd382c4268a8ff52b85bff465d.png" alt="img"></p>
+<p>像这种情况，如果你从代码上看应该是这一句：k = next[k];为什么是这样子？看下面应该就明白了。</p>
+<p><img src="https://images0.cnblogs.com/blog/416010/201308/17122439-e349fed25e974e7886a27d18871ae48a.png" alt="img"></p>
+<p>现在你应该知道为什么要k = next[k]了吧！像上边的例子，我们已经不可能找到[ A，B，A，B ]这个最长的后缀串了，但我们还是可能找到[ A，B ]、[ B ]这样的前缀串的。所以这个过程像不像在定位[ A，B，A，C ]这个串，当C和主串不一样了（也就是k位置不一样了），那当然是把指针移动到next[k]啦。</p>
+<p><img src="C:%5CUsers%5Cdell%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1589642308169.png" alt="1589642308169"></p>
+<p>k 相当于求取前后缀的最长公共字符串</p>
+<table>
+<thead>
+<tr>
+<th>最长公共子字符串的长度</th>
+<th>字符串</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-1</td>
+<td>A</td>
+</tr>
+<tr>
+<td>0</td>
+<td>AB</td>
+</tr>
+<tr>
+<td>0</td>
+<td>ABC</td>
+</tr>
+<tr>
+<td>1</td>
+<td>ABCA</td>
+</tr>
+<tr>
+<td>2</td>
+<td>ABCAB</td>
+</tr>
+</tbody></table>
+<p>根据next数组我们就可以写出来了KMP算法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">kmp</span><span class="params">(String haystack, String needle)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">char</span>[] ps = haystack.toCharArray();</span><br><span class="line">        <span class="keyword">char</span>[] sr = needle.toCharArray();</span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> j = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span>[] next = getNext(needle);</span><br><span class="line">        <span class="keyword">while</span> (i &lt; ps.length &amp;&amp; j &lt; sr.length) &#123;</span><br><span class="line">            <span class="keyword">if</span> (j == -<span class="number">1</span> || ps[i] == sr[j]) &#123;</span><br><span class="line">                i++;</span><br><span class="line">                j++;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                j = next[j];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (j == sr.length) &#123;</span><br><span class="line">            <span class="keyword">return</span> i - j;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="优化KMP算法"><a href="#优化KMP算法" class="headerlink" title="优化KMP算法"></a>优化KMP算法</h4><p><img src="https://images0.cnblogs.com/blog/416010/201308/17084712-f0d6998938764b309f61923452a2b20f.png" alt="img"></p>
+<p>显然，当我们上边的算法得到的next数组应该是[ -1，0，0，1 ]</p>
+<p>所以下一步我们应该是把 j 移动到第1个元素：</p>
+<p><img src="https://images0.cnblogs.com/blog/416010/201308/17084726-790fc1b2c48c411b8011eab9de692f6d.png" alt="img"></p>
+<p>不难发现，<strong>这一步是完全没有意义的。因为后面的B已经不匹配了，那前面的B也一定是不匹配的</strong>，同样的情况其实还发生在第2个元素A上。</p>
+<p>显然，<strong>发生问题的原因在于P[j] == P[next[j]]</strong>。</p>
+<p>所以我们也只需要添加一个判断条件即可：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span>[] getNext(String ps) &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">char</span>[] p = ps.toCharArray();</span><br><span class="line">    <span class="keyword">int</span>[] next = <span class="keyword">new</span> <span class="keyword">int</span>[p.length];</span><br><span class="line">    next[<span class="number">0</span>] = -<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> j = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> k = -<span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (j &lt; p.length - <span class="number">1</span>) &#123;</span><br><span class="line">       <span class="keyword">if</span> (k == -<span class="number">1</span> || p[j] == p[k]) &#123;</span><br><span class="line">           <span class="keyword">if</span> (p[++j] == p[++k]) &#123; <span class="comment">// 当两个字符相等时要跳过</span></span><br><span class="line">              next[j] = next[k];</span><br><span class="line">           &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">              next[j] = k;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">           k = next[k];</span><br><span class="line">       &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> next;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/13/dijkstra%E7%AE%97%E6%B3%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1036,7 +1238,7 @@
               
                 <a href="/archives/%20%7C%7C%20archive">
               
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
