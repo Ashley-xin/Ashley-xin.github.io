@@ -229,6 +229,261 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/24/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/05/24/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" itemprop="url">动态规划</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-05-24T15:45:31+08:00">
+                2020-05-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h3><h4 id="了解动态规划"><a href="#了解动态规划" class="headerlink" title="了解动态规划"></a>了解动态规划</h4><p>与分而治之原理类似，将待求解的问题划分成若干个子问题（阶段）求解，顺序求解各个子问题（阶段），前一子问题（阶段）为后一子问题（阶段）的求解提供有用的信息。通过各个子问题（阶段）的求解，依次递进，最终得到初始问题的解。一般情况下，能够通过动态规划求解的问题也可通过递归求解。</p>
+<p>动态规划求解的问题多数有重叠子问题的特点，为了减少重复计算，对每个子问题只求解一次，将不同子问题（阶段）的解保存在数组中。</p>
+<p>与分而治之的区别：分而治之得到的若干子问题（阶段）一般彼此独立，各个子问题（阶段）之间没有顺序要求。而动态规划中各子问题（阶段）求解有顺序要求，具有重叠子问题（阶段），后一子问题（阶段）求解取决于前一子问题（阶段）的解。</p>
+<p>与递归区别：与递归求解区别不大，都是划分成各个子问题（阶段），后一子问题（阶段）取决于前一子问题（阶段），但递归需要反复求解同一个子问题（阶段），相较于动态规划做了很多重复性工作。</p>
+<p>本质：状态定义，状态转移方程定义</p>
+<h4 id="动态规划解决01背包问题"><a href="#动态规划解决01背包问题" class="headerlink" title="动态规划解决01背包问题"></a>动态规划解决01背包问题</h4><p>题目要求：</p>
+<p>假设有A，B，C，D，E这五件物品，一个容量为8的背包，使背包中物品价值最大化。</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>A</th>
+<th>B</th>
+<th>C</th>
+<th>D</th>
+<th>E</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>size</td>
+<td>3</td>
+<td>1</td>
+<td>10</td>
+<td>2</td>
+<td>4</td>
+</tr>
+<tr>
+<td>value</td>
+<td>2</td>
+<td>10</td>
+<td>100</td>
+<td>1</td>
+<td>3</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>0</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+<th>7</th>
+<th>8</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>2</td>
+<td>2</td>
+<td>2</td>
+<td>2</td>
+<td>2</td>
+<td>2</td>
+</tr>
+<tr>
+<td>2</td>
+<td>0</td>
+<td>10</td>
+<td>10</td>
+<td>10</td>
+<td>12</td>
+<td>12</td>
+<td>12</td>
+<td>12</td>
+<td>12</td>
+</tr>
+<tr>
+<td>3</td>
+<td>0</td>
+<td>10</td>
+<td>10</td>
+<td>10</td>
+<td>12</td>
+<td>12</td>
+<td>12</td>
+<td>12</td>
+<td>12</td>
+</tr>
+<tr>
+<td>4</td>
+<td>0</td>
+<td>10</td>
+<td>10</td>
+<td>11</td>
+<td>12</td>
+<td>12</td>
+<td>13</td>
+<td>13</td>
+<td>13</td>
+</tr>
+<tr>
+<td>5</td>
+<td>0</td>
+<td>10</td>
+<td>10</td>
+<td>11</td>
+<td>12</td>
+<td>13</td>
+<td>13</td>
+<td>14</td>
+<td>15</td>
+</tr>
+</tbody></table>
+<p>$$<br>状态定义：<br>w[i] :  第 i 个物体的重量；</p>
+<p>p[i] : 第i个物体的价值；</p>
+<p>c[i][j] ： 前i个物体放入容量为j的背包的最大价值；</p>
+<p>c[i-1][j] ： 前i-1个物体放入容量为j的背包的最大价值；</p>
+<p>c[i-1][j - w[i]] ： 前i-1个物体放入容量为j-w[i]的背包的最大价值；</p>
+<p>状态转移方程:<br>c[i][j] = c[i-1][j] w[i]&gt;j</p>
+<p>c[i][j]=max{c[i - 1][j-w[i]] + pi , c[i - 1][j]}  w[i] &lt;= j</p>
+<p>c[i - 1][j] 表示不放入第 i 个物品</p>
+<p>c[i - 1][j-w[i]]表示放入第 i 个物品的总价值</p>
+<p>初始化：<br>C[i][0] = 0<br>c[0][j] = 0</p>
+<p>返回值<br>return c[i][j]<br>$$</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DP_01</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> weight = <span class="number">8</span>;<span class="comment">//背包容量</span></span><br><span class="line">        <span class="keyword">int</span> count = <span class="number">5</span>;<span class="comment">//物品数量</span></span><br><span class="line">        <span class="keyword">int</span>[] weights = &#123;<span class="number">3</span>,<span class="number">1</span>,<span class="number">10</span>,<span class="number">2</span>,<span class="number">4</span>&#125;;</span><br><span class="line">        <span class="keyword">int</span>[] values = &#123;<span class="number">2</span>,<span class="number">10</span>,<span class="number">100</span>,<span class="number">1</span>,<span class="number">3</span>&#125;;</span><br><span class="line">        System.out.println(dp(weight,count,weights,values));</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">dp</span><span class="params">(<span class="keyword">int</span> weight, <span class="keyword">int</span> count, <span class="keyword">int</span>[] weights, <span class="keyword">int</span>[] values)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> row = count + <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> col = weight + <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span>[][] v = <span class="keyword">new</span> <span class="keyword">int</span>[count + <span class="number">1</span>][weight + <span class="number">1</span>];</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> maxValue = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//初始化</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; col; i++) &#123;</span><br><span class="line">            v[<span class="number">0</span>][i] = <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; row; j++) &#123;</span><br><span class="line">            v[j][<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; row; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt; col; j++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (weights[i - <span class="number">1</span>] &gt; j) &#123;</span><br><span class="line">                    v[i][j] = v[i - <span class="number">1</span>][j];</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    v[i][j] = Math.max(v[i - <span class="number">1</span>][j],v[i - <span class="number">1</span>][j - weights[i - <span class="number">1</span>]] + values[i - <span class="number">1</span>]);</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span> (v[i][j] &gt; maxValue) &#123;</span><br><span class="line">                    maxValue = v[i][j];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> maxValue;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/16/KMP%E7%AE%97%E6%B3%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1238,7 +1493,7 @@
               
                 <a href="/archives/%20%7C%7C%20archive">
               
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
