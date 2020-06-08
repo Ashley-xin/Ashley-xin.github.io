@@ -229,6 +229,167 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/08/%E9%93%BE%E8%A1%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/06/08/%E9%93%BE%E8%A1%A8/" itemprop="url">链表</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-06-08T23:18:58+08:00">
+                2020-06-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="链表"><a href="#链表" class="headerlink" title="链表"></a>链表</h3><p>链表是一种常见的基础数据结构，是一种线性表，但是并不会按线性的顺序存储数据，而是在每一个节点里存到下一个节点的指针(Pointer).</p>
+<p>从本质上来讲,链表与数组的确有相似之处,他们的相同点是都是线性数据结构,这与树和图不同,而它们的不同之处在于数组是一块连续的内存,而链表可以不是连续内存,链表的节点与节点之间通过指针来联系.</p>
+<p>链表也有不同的形态,主要分为三种:单向链表、双向链表、循环链表.</p>
+<h4 id="单链表"><a href="#单链表" class="headerlink" title="单链表"></a>单链表</h4><p>单向链表的节点通常由两个部分构成,一个是节点储存的值<code>val</code>,另一个就是节点的指针<code>next</code>.</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/9/20/16d4c965b752cf92?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="单向链表"></p>
+<p>链表与数组类似,也可以进行查找、插入、删除、读取等操作,但是由于链表与数组的特性不同,导致不同操作的复杂度也不同.</p>
+<h4 id="查找性能"><a href="#查找性能" class="headerlink" title="查找性能"></a>查找性能</h4><p>单向链表的查找操作通常是这样的:</p>
+<ol>
+<li>从头节点进入,开始比对节点的值,如果不同则通过指针进入下一个节点</li>
+<li>重复上面的动作,直到找到相同的值,或者节点的指针指向null</li>
+</ol>
+<p>链表的查找性能与数组一样,都是时间复杂度为O(n).</p>
+<h4 id="插入删除性能"><a href="#插入删除性能" class="headerlink" title="插入删除性能"></a>插入删除性能</h4><p>链表与数组最大的不同就在于删除、插入的性能优势,由于链表是非连续的内存,所以不用像数组一样在插入、删除操作的时候需要进行大面积的成员位移,比如在a、b节点之间插入一个新节点c,链表只需要:</p>
+<ol>
+<li>a断开指向b的指针，将指针指向c</li>
+<li>c节点将指针指向b，完毕</li>
+</ol>
+<p>这个插入操作仅仅需要移动一下指针即可，插入、删除的时间复杂度只有O(1).</p>
+<p>链表的插入操作如下:</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/9/20/16d4c965b786cf71?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="插入操作"></p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/9/20/16d4c965b765e4d1?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="删除操作"></p>
+<h4 id="读取性能"><a href="#读取性能" class="headerlink" title="读取性能"></a>读取性能</h4><p>链表相比之下也有劣势，那就是读取操作远不如数组，数组的读取操作之所以高效，是因为它是一块连续内存，数组的读取可以通过寻址公式快速定位，而链表由于非连续内存，所以必须通过指针一个一个节点遍历.</p>
+<p>比如,对于一个数组,我们要读取第三个成员,我们仅需要<code>arr[2]</code>就能快速获取成员,而链表则需要从头部节点进入,在通过指针进入后续节点才能读取.</p>
+<h4 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h4><p>由于双向链表的存在,单向链表的应用场景比较少,因为很多场景双向链表可以更出色地完成.</p>
+<p>但是单向链表并非无用武之地,在以下场景中依然会有单向链表的身影:</p>
+<ol>
+<li><p>撤销功能,这种操作最多见于各种文本、图形编辑器中,撤销重做在编辑器场景下属于家常便饭,单向链表由于良好的删除特性在这个场景很适用</p>
+</li>
+<li><p>实现图、hashMap等一些高级数据结构</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ListNode</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> val;</span><br><span class="line">    ListNode next;</span><br><span class="line">    ListNode (<span class="keyword">int</span> val) &#123;</span><br><span class="line">        <span class="keyword">this</span>.val = val;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">myListNode</span> </span>&#123;</span><br><span class="line">    <span class="comment">//创建头结点</span></span><br><span class="line">    ListNode head = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//增加结点</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addNode</span> <span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">        ListNode node = <span class="keyword">new</span> ListNode(x);</span><br><span class="line">        <span class="keyword">if</span> (head == <span class="keyword">null</span>) &#123;</span><br><span class="line">            head = node;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            ListNode cur = head;</span><br><span class="line">            <span class="keyword">while</span> (cur.next != <span class="keyword">null</span>) &#123;</span><br><span class="line">                cur = cur.next;</span><br><span class="line">            &#125;</span><br><span class="line">            cur.next = node;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">add_Node</span> <span class="params">(<span class="keyword">int</span> index,<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">        ListNode node = <span class="keyword">new</span> ListNode(x);</span><br><span class="line">        <span class="keyword">if</span> (head == <span class="keyword">null</span>) &#123;</span><br><span class="line">            head = node;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        ListNode prev = head;</span><br><span class="line">        ListNode cur = head.next;</span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span> (i != index - <span class="number">1</span>) &#123;</span><br><span class="line">            prev = prev.next;</span><br><span class="line">            cur = cur.next;</span><br><span class="line">            i++;</span><br><span class="line">        &#125;</span><br><span class="line">        prev.next = node;</span><br><span class="line">        node.next = cur;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//删除结点</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">deletrNode</span> <span class="params">(<span class="keyword">int</span> index)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (index &lt; <span class="number">1</span> || index &gt; length()) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (index == <span class="number">1</span>) &#123;</span><br><span class="line">            head = head.next;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        ListNode prev = head;</span><br><span class="line">        ListNode cur = prev.next;</span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">while</span> (prev != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (i == index) &#123;</span><br><span class="line">                prev.next = cur.next;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                prev = prev.next;</span><br><span class="line">                cur = cur.next;</span><br><span class="line">                i++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">length</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> size = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (ListNode cur = head; cur != <span class="keyword">null</span>; cur = cur.next) &#123;</span><br><span class="line">            size++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> size;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">print_linklist</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        ListNode node = head;</span><br><span class="line">        <span class="keyword">while</span> (node != <span class="keyword">null</span>) &#123;</span><br><span class="line">            System.out.print(node.val + <span class="string">" "</span>);</span><br><span class="line">            node = node.next;</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        myListNode myListNode = <span class="keyword">new</span> myListNode();</span><br><span class="line">        myListNode.addNode(<span class="number">2</span>);</span><br><span class="line">        myListNode.addNode(<span class="number">3</span>);</span><br><span class="line">        myListNode.addNode(<span class="number">4</span>);</span><br><span class="line">        myListNode.addNode(<span class="number">5</span>);</span><br><span class="line">        myListNode.print_linklist();</span><br><span class="line">        myListNode.add_Node(<span class="number">2</span>,<span class="number">8</span>);</span><br><span class="line">        myListNode.print_linklist();</span><br><span class="line">        myListNode.deletrNode(<span class="number">3</span>);</span><br><span class="line">        myListNode.print_linklist();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="双向链表"><a href="#双向链表" class="headerlink" title="双向链表"></a>双向链表</h3><p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly94aWFvbXV6aHUtaW1hZ2Uub3NzLWNuLWJlaWppbmcuYWxpeXVuY3MuY29tLzZjZTcyMDYxZTYxNjgyMzczOWY5ZDI0NjkxNTIwMGZkLnBuZw?x-oss-process=image/format,png" alt="双向链表"></p>
+<p>双向链表多了一个新的指针prev指向节点的前一个节点,当然由于多了一个指针,所以双向链表要更占内存.</p>
+<p>它的效率更高,也更加实用.</p>
+<p>比如编辑器的「undo/redo」操作,双向链表就更加适用,由于拥有前后指针,用户可以自由得进行前后操作,如果这个是一个单向链表,那么用户需要遍历链表这时的时间复杂度是O(n).</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"> </span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+<p>小结<br>至此,我们对链表这个数据结构有了一定的认知,由于其非连续内存的特性导致链表非常适用于频繁插入、删除的场景，而不见长于读取场景，这跟数组的特性恰好形成互补，所以现在也可以回到题目中的问题了，链表的特性与数组互补，各有所长，而且链表由于指针的存在可以形成环形链表，在特定场景也非常有用，因此链表的存在是很有必要的。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/24/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1493,7 +1654,7 @@
               
                 <a href="/archives/%20%7C%7C%20archive">
               
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
