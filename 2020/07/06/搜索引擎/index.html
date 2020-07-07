@@ -79,15 +79,15 @@
 
 
 
-<meta name="description" content="第一部分 预处理模块，将下载好的api文档中的html后缀的文件，简单的分析其结构，去掉html后缀 功能 （1）将每个html文档解析为   标题  url  以及   正文（去掉标签）三个部分为一行，存入文本文档中 单元测试： 1.判断这个文件是不是行文本格式 2.判断一行是不是被分为了三部分 3.一行是否对应一个一个html 4.验证文件名和标题名一致 5.验证url是否可以调转到对应的页面">
+<meta name="description" content="第一部分 预处理模块，将下载好的 API 文档中的html后缀的文件，简单的分析其结构，去掉html后缀，存入文件中 功能 (1)首先读取下载好的API文档，将以 .html 结尾的文档都存储在 ArrayList 中 （2）将每个html文档解析为   标题  URL  以及   正文（去掉标签）三个部分为一行，存入文本文档中 测试点：    1.判断这个文件是不是行文本格式    2.判断一行">
 <meta property="og:type" content="article">
 <meta property="og:title" content="搜索引擎">
 <meta property="og:url" content="http://yoursite.com/2020/07/06/%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="第一部分 预处理模块，将下载好的api文档中的html后缀的文件，简单的分析其结构，去掉html后缀 功能 （1）将每个html文档解析为   标题  url  以及   正文（去掉标签）三个部分为一行，存入文本文档中 单元测试： 1.判断这个文件是不是行文本格式 2.判断一行是不是被分为了三部分 3.一行是否对应一个一个html 4.验证文件名和标题名一致 5.验证url是否可以调转到对应的页面">
+<meta property="og:description" content="第一部分 预处理模块，将下载好的 API 文档中的html后缀的文件，简单的分析其结构，去掉html后缀，存入文件中 功能 (1)首先读取下载好的API文档，将以 .html 结尾的文档都存储在 ArrayList 中 （2）将每个html文档解析为   标题  URL  以及   正文（去掉标签）三个部分为一行，存入文本文档中 测试点：    1.判断这个文件是不是行文本格式    2.判断一行">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-07-06T01:58:03.642Z">
-<meta property="article:modified_time" content="2020-07-06T01:55:54.757Z">
+<meta property="article:modified_time" content="2020-07-07T09:22:44.275Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
 
@@ -300,25 +300,66 @@
 
       
         <p>第一部分</p>
-<p>预处理模块，将下载好的api文档中的html后缀的文件，简单的分析其结构，去掉html后缀</p>
+<p>预处理模块，将下载好的 API 文档中的html后缀的文件，简单的分析其结构，去掉html后缀，存入文件中</p>
 <p>功能</p>
-<p>（1）将每个html文档解析为   标题  url  以及   正文（去掉标签）三个部分为一行，存入文本文档中</p>
-<p>单元测试：</p>
-<p>1.判断这个文件是不是行文本格式</p>
-<p>2.判断一行是不是被分为了三部分</p>
-<p>3.一行是否对应一个一个html</p>
-<p>4.验证文件名和标题名一致</p>
-<p>5.验证url是否可以调转到对应的页面上</p>
-<p>6.验证正文是否去掉了标签</p>
+<p>(1)首先读取下载好的API文档，将以 .html 结尾的文档都存储在 ArrayList 中</p>
+<p>（2）将每个html文档解析为   标题  URL  以及   正文（去掉标签）三个部分为一行，存入文本文档中</p>
+<p><strong>测试点：</strong></p>
+<table>
+<thead>
+<tr>
+<th>1.判断这个文件是不是行文本格式</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>2.判断一行是不是被分为了三部分</td>
+</tr>
+<tr>
+<td>3.一行是否对应一个一个html</td>
+</tr>
+<tr>
+<td>4.验证文件名和标题名一致</td>
+</tr>
+<tr>
+<td>5.验证URL是否可以调转到对应的页面上</td>
+</tr>
+<tr>
+<td>6.验证正文是否去掉了标签</td>
+</tr>
+</tbody></table>
 <p>第二部分</p>
-<p>构建索引正排索引，与倒排索引</p>
-<p>单元测试</p>
-<p>（1）测试正排序所有数据是不是按照规定的格式存储</p>
-<p>（2）测试倒排序所有数据存储格式是否正确</p>
+<p>构建正排索引，通过正排索引得到倒排索引</p>
+<p><strong>测试点</strong></p>
+<table>
+<thead>
+<tr>
+<th>1.测试正排序所有数据是不是按照规定的格式存储</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>2.测试倒排序所有数据存储格式是否正确</td>
+</tr>
+</tbody></table>
 <p>第三部分</p>
-<p>搜索模块，对查询</p>
+<p>查询搜索模块</p>
+<p>首先，就是对要查询的词进行分词，然后调用倒排索引，获取信息。</p>
+<p>然后，根据根据权重倒序信息</p>
+<p>将信息包装成结果。</p>
+<p>使用 servlet来结果展示</p>
+<p><strong>测试点</strong></p>
+<table>
+<thead>
+<tr>
+<th>是否得到的结果按照倒序排列</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>是否结果与查询词有关</td>
+</tr>
+</tbody></table>
 <p>第四部分</p>
-<p>界面测试：</p>
+<p>前后端交互</p>
+<p><strong>界面测试：</strong></p>
 <table>
 <thead>
 <tr>
@@ -378,7 +419,7 @@
 <td>页面是否有分页</td>
 </tr>
 </tbody></table>
-<p>功能测试</p>
+<p><strong>功能测试</strong></p>
 <table>
 <thead>
 <tr>
@@ -390,7 +431,7 @@
 <tbody><tr>
 <td></td>
 <td></td>
-<td>输入字体后，文字消失</td>
+<td>输入字体后，提示文字消失</td>
 </tr>
 <tr>
 <td></td>
@@ -498,7 +539,7 @@
 <td></td>
 </tr>
 </tbody></table>
-<p>兼容性测试</p>
+<p><strong>兼容性测试</strong></p>
 <table>
 <thead>
 <tr>
@@ -523,7 +564,7 @@
 <td>此处仅仅针对于本机所有浏览器，采用自动化测试</td>
 </tr>
 </tbody></table>
-<p>易用性测试，安全测试，性能测试</p>
+<p><strong>易用性测试，安全测试，性能测试</strong></p>
 <table>
 <thead>
 <tr>
@@ -569,13 +610,41 @@
 </tr>
 </tbody></table>
 <p>​              </p>
-<p>发现bug</p>
-<p>在输入空格，或者输入超长字符或者不输入的时候点击查询，没有任何提示，页面显示空白。</p>
-<p>当我们输入同一个关键字重复然后点击查询，也查询不到结果</p>
-<p>当我们点击搜索结果跳转到结果页面，点击回退，但是之前的结果展示显示空白（谷歌浏览器）</p>
-<p>当我们回退回来，再次点击之前输入的，没有显示结果。输入再次输入才可以。</p>
-<p>IE浏览器中访问页面，页面展示有问题。</p>
-<p>IE浏览器中点击查询，也没有结果展示。</p>
+<p><strong>发现bug</strong></p>
+<table>
+<thead>
+<tr>
+<th>在输入空格，或者输入超长字符或者不输入的时候点击查询，没有任何提示，页面显示空白。</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>当我们输入同一个关键字* n 然后点击查询，也查询不到结果。</td>
+</tr>
+<tr>
+<td>当我们点击搜索结果跳转到结果页面，点击回退页面，但是之前的结果展示显示空白（谷歌浏览器）</td>
+</tr>
+<tr>
+<td>当我们回退页面，不更改之前搜索的，没有显示结果。输入再次输入才可以。（谷歌浏览器）</td>
+</tr>
+<tr>
+<td>IE浏览器中访问页面，页面展示有问题。</td>
+</tr>
+<tr>
+<td>IE浏览器中点击查询，也没有结果展示。</td>
+</tr>
+<tr>
+<td>首次查询需要10几秒才可以查询到结果，发现首次查询需要构建倒排。</td>
+</tr>
+<tr>
+<td>当我们先输入空格，再输入要查询词。程序有时会出现未响应，需要重新刷新页面</td>
+</tr>
+<tr>
+<td></td>
+</tr>
+<tr>
+<td></td>
+</tr>
+</tbody></table>
 
       
     </div>
